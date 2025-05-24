@@ -1,0 +1,4 @@
+# This file is intentionally left empty.
+# It's a common convention to use a .gitkeep file
+# to ensure that an otherwise empty directory is tracked by Git.
+# This directory will hold repository interfaces/classes.
