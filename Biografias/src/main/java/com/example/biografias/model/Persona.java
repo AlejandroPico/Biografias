@@ -1,137 +1,246 @@
 package com.example.biografias.model;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-@Table(name = "persona")
+@Entity
+@Table(name = "Persona")
 public class Persona {
 
-	@Id
-	@Column(name = "PersonaID", nullable = false)
-	private Integer personaID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PersonaID")
+    private Integer personaID;
 
-	@Column(name = "Nombre")
-	private String nombre;
+    @Column(name = "Nombre", nullable = false, length = 100)
+    private String nombre;
 
-	@Column(name = "Apellidos")
-	private String apellidos;
+    @Column(name = "Apellidos", nullable = false, length = 100)
+    private String apellidos;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "FechaNacimiento")
-	private Date fechaNacimiento;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "FechaNacimiento")
+    private Date fechaNacimiento;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "FechaFallecimiento")
-	private Date fechaFallecimiento;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "FechaFallecimiento")
+    private Date fechaFallecimiento;
 
-	@Column(name = "Genero")
-	private String genero;
+    @Column(name = "Genero", length = 50)
+    private String genero;
 
-	@Column(name = "Nacionalidad")
-	private String nacionalidad;
+    @Column(name = "Nacionalidad", length = 100)
+    private String nacionalidad;
 
-	@Column(name = "DescripcionCorta")
-	private String descripcionCorta;
+    @Column(name = "DescripcionCorta", length = 500)
+    private String descripcionCorta;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CreatedAt")
-	private Date createdAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CreatedAt", nullable = false)
+    private Date createdAt;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UpdatedAt")
-	private Date updatedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "UpdatedAt", nullable = false)
+    private Date updatedAt;
 
-	public Persona() {
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Biografia> biografias;
 
-	}
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<EventoVida> eventosVida;
 
-	public Persona(Integer personaID) {
-		this.personaID = personaID;
-	}
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Educacion> educaciones;
 
-	public Integer getPersonaID() {
-		return personaID;
-	}
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Empleo> empleos;
 
-	public void setPersonaID(Integer personaID) {
-		this.personaID = personaID;
-	}
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Publicacion> publicaciones;
 
-	public String getNombre() {
-		return nombre;
-	}
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Medio> medios;
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    @OneToMany(mappedBy = "persona", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Referencia> referencias;
 
-	public String getApellidos() {
-		return apellidos;
-	}
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "PersonaEtiqueta",
+        joinColumns = @JoinColumn(name = "PersonaID"),
+        inverseJoinColumns = @JoinColumn(name = "EtiquetaID")
+    )
+    private Set<Etiqueta> etiquetas;
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
+    public Persona() {
+    }
 
-	public Date getFechaNacimiento() {
-		return fechaNacimiento;
-	}
+    public Persona(String nombre, String apellidos, Date createdAt, Date updatedAt) {
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
+    // Getters and Setters
 
-	public Date getFechaFallecimiento() {
-		return fechaFallecimiento;
-	}
+    public Integer getPersonaID() {
+        return personaID;
+    }
 
-	public void setFechaFallecimiento(Date fechaFallecimiento) {
-		this.fechaFallecimiento = fechaFallecimiento;
-	}
+    public void setPersonaID(Integer personaID) {
+        this.personaID = personaID;
+    }
 
-	public String getGenero() {
-		return genero;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getNacionalidad() {
-		return nacionalidad;
-	}
+    public String getApellidos() {
+        return apellidos;
+    }
 
-	public void setNacionalidad(String nacionalidad) {
-		this.nacionalidad = nacionalidad;
-	}
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
 
-	public String getDescripcionCorta() {
-		return descripcionCorta;
-	}
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
 
-	public void setDescripcionCorta(String descripcionCorta) {
-		this.descripcionCorta = descripcionCorta;
-	}
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
+    public Date getFechaFallecimiento() {
+        return fechaFallecimiento;
+    }
 
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
+    public void setFechaFallecimiento(Date fechaFallecimiento) {
+        this.fechaFallecimiento = fechaFallecimiento;
+    }
 
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
+    public String getGenero() {
+        return genero;
+    }
 
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
 
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public String getDescripcionCorta() {
+        return descripcionCorta;
+    }
+
+    public void setDescripcionCorta(String descripcionCorta) {
+        this.descripcionCorta = descripcionCorta;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public List<Biografia> getBiografias() {
+        return biografias;
+    }
+
+    public void setBiografias(List<Biografia> biografias) {
+        this.biografias = biografias;
+    }
+
+    public List<EventoVida> getEventosVida() {
+        return eventosVida;
+    }
+
+    public void setEventosVida(List<EventoVida> eventosVida) {
+        this.eventosVida = eventosVida;
+    }
+
+    public List<Educacion> getEducaciones() {
+        return educaciones;
+    }
+
+    public void setEducaciones(List<Educacion> educaciones) {
+        this.educaciones = educaciones;
+    }
+
+    public List<Empleo> getEmpleos() {
+        return empleos;
+    }
+
+    public void setEmpleos(List<Empleo> empleos) {
+        this.empleos = empleos;
+    }
+
+    public List<Publicacion> getPublicaciones() {
+        return publicaciones;
+    }
+
+    public void setPublicaciones(List<Publicacion> publicaciones) {
+        this.publicaciones = publicaciones;
+    }
+
+    public List<Medio> getMedios() {
+        return medios;
+    }
+
+    public void setMedios(List<Medio> medios) {
+        this.medios = medios;
+    }
+
+    public List<Referencia> getReferencias() {
+        return referencias;
+    }
+
+    public void setReferencias(List<Referencia> referencias) {
+        this.referencias = referencias;
+    }
+
+    public Set<Etiqueta> getEtiquetas() {
+        return etiquetas;
+    }
+
+    public void setEtiquetas(Set<Etiqueta> etiquetas) {
+        this.etiquetas = etiquetas;
+    }
 }
