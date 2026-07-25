@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: ${MINDSAGE_DATABASE_URL:jdbc:sqlite:./data/mindsage.db}
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      connection-init-sql: PRAGMA foreign_keys=ON
+      maximum-pool-size: 1
+  jpa:
+    hibernate:
+      ddl-auto: none

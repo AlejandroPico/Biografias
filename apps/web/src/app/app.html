@@ -1,0 +1,788 @@
+<svg class="svg-sprite" aria-hidden="true">
+  <symbol id="icon-home" viewBox="0 0 24 24">
+    <path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5.5v-6h-5v6H4a1 1 0 0 1-1-1z" />
+  </symbol>
+  <symbol id="icon-people" viewBox="0 0 24 24">
+    <circle cx="9" cy="8" r="3.2" /><path d="M3.5 20v-2.2A4.8 4.8 0 0 1 8.3 13h1.4a4.8 4.8 0 0 1 4.8 4.8V20M15 5.3a3 3 0 0 1 0 5.4M16.5 13.2a4.8 4.8 0 0 1 4 4.7V20" />
+  </symbol>
+  <symbol id="icon-mic" viewBox="0 0 24 24">
+    <rect x="8" y="3" width="8" height="12" rx="4" /><path d="M5 11a7 7 0 0 0 14 0M12 18v3M8 21h8" />
+  </symbol>
+  <symbol id="icon-timeline" viewBox="0 0 24 24">
+    <path d="M6 3v18M6 7h9M6 12h12M6 17h7" /><circle cx="6" cy="7" r="2" /><circle cx="6" cy="12" r="2" /><circle cx="6" cy="17" r="2" />
+  </symbol>
+  <symbol id="icon-family" viewBox="0 0 24 24">
+    <circle cx="12" cy="5" r="2.5" /><circle cx="6" cy="17" r="2.5" /><circle cx="18" cy="17" r="2.5" /><path d="M12 7.5v4M6 14.5V12h12v2.5" />
+  </symbol>
+  <symbol id="icon-map" viewBox="0 0 24 24">
+    <path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2zM9 3v16M15 5v16" />
+  </symbol>
+  <symbol id="icon-archive" viewBox="0 0 24 24">
+    <path d="M4 7h16v13H4zM3 3h18v4H3zM9 11h6" />
+  </symbol>
+  <symbol id="icon-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" />
+  </symbol>
+  <symbol id="icon-plus" viewBox="0 0 24 24">
+    <path d="M12 5v14M5 12h14" />
+  </symbol>
+  <symbol id="icon-lock" viewBox="0 0 24 24">
+    <rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" />
+  </symbol>
+  <symbol id="icon-download" viewBox="0 0 24 24">
+    <path d="M12 3v12m0 0 5-5m-5 5-5-5M4 20h16" />
+  </symbol>
+  <symbol id="icon-sun" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+  </symbol>
+  <symbol id="icon-moon" viewBox="0 0 24 24">
+    <path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5" />
+  </symbol>
+  <symbol id="icon-chevron" viewBox="0 0 24 24">
+    <path d="m9 5 7 7-7 7" />
+  </symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24">
+    <path d="M12 3 4.5 6v5.5c0 4.7 3.2 8 7.5 9.5 4.3-1.5 7.5-4.8 7.5-9.5V6z" /><path d="m8.5 12 2.2 2.2 4.8-5" />
+  </symbol>
+  <symbol id="icon-play" viewBox="0 0 24 24">
+    <path d="m9 6 9 6-9 6z" />
+  </symbol>
+  <symbol id="icon-location" viewBox="0 0 24 24">
+    <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0" /><circle cx="12" cy="10" r="2.5" />
+  </symbol>
+  <symbol id="icon-book" viewBox="0 0 24 24">
+    <path d="M4 4.5A3.5 3.5 0 0 1 7.5 8H12v13H7.5A3.5 3.5 0 0 0 4 17.5zM20 4.5A3.5 3.5 0 0 0 16.5 8H12v13h4.5a3.5 3.5 0 0 1 3.5-3.5z" />
+  </symbol>
+  <symbol id="icon-image" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" /><circle cx="9" cy="9" r="2" /><path d="m3 17 5-5 4 4 2-2 7 6" />
+  </symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" />
+  </symbol>
+</svg>
+
+<div class="app-shell">
+  <aside class="sidebar" [class.open]="mobileMenuOpen()">
+    <button class="brand" type="button" (click)="navigate('home')" aria-label="Ir al inicio">
+      <span class="brand-mark">
+        <span></span><span></span><span></span>
+      </span>
+      <span>
+        <strong>MindSage</strong>
+        <small>La memoria que nos une</small>
+      </span>
+    </button>
+
+    <nav class="primary-nav" aria-label="Navegación principal">
+      @for (item of primaryNavigation; track item.id) {
+        <button
+          type="button"
+          [class.active]="view() === item.id || (item.id === 'people' && view() === 'person')"
+          (click)="navigate(item.id)"
+        >
+          <svg class="icon"><use [attr.href]="'#icon-' + item.icon"></use></svg>
+          <span>{{ item.label }}</span>
+          @if (item.id === 'people') {
+            <small>{{ vault.people().length }}</small>
+          }
+        </button>
+      }
+    </nav>
+
+    <div class="sidebar-spacer"></div>
+    <button class="privacy-card" type="button" (click)="navigate('privacy')">
+      <span class="privacy-icon">
+        <svg class="icon"><use href="#icon-shield"></use></svg>
+      </span>
+      <span>
+        <strong>Tu archivo es tuyo</strong>
+        <small>Control, consentimiento y copias portables.</small>
+      </span>
+      <svg class="icon arrow"><use href="#icon-chevron"></use></svg>
+    </button>
+
+    <div class="sidebar-footer">
+      <button type="button" (click)="navigate('privacy')">
+        Privacidad y ayuda
+      </button>
+      <span>Prototipo 0.1</span>
+    </div>
+  </aside>
+
+  @if (mobileMenuOpen()) {
+    <button
+      class="sidebar-backdrop"
+      type="button"
+      aria-label="Cerrar menú"
+      (click)="mobileMenuOpen.set(false)"
+    ></button>
+  }
+
+  <main class="main-content">
+    <header class="topbar">
+      <button
+        class="mobile-menu"
+        type="button"
+        aria-label="Abrir menú"
+        (click)="mobileMenuOpen.set(true)"
+      >
+        <span></span><span></span><span></span>
+      </button>
+
+      <label class="global-search">
+        <svg class="icon"><use href="#icon-search"></use></svg>
+        <input
+          type="search"
+          placeholder="Buscar personas, lugares, recuerdos…"
+          [ngModel]="searchTerm()"
+          (ngModelChange)="searchTerm.set($event); navigate('people')"
+        />
+        <kbd>⌘ K</kbd>
+      </label>
+
+      <div class="topbar-actions">
+        <button
+          class="icon-button"
+          type="button"
+          [attr.aria-label]="darkMode() ? 'Usar tema claro' : 'Usar tema oscuro'"
+          (click)="setTheme()"
+        >
+          <svg class="icon">
+            <use [attr.href]="darkMode() ? '#icon-sun' : '#icon-moon'"></use>
+          </svg>
+        </button>
+        <button
+          class="button button-primary create-button"
+          type="button"
+          (click)="createDialogOpen.set(true)"
+        >
+          <svg class="icon"><use href="#icon-plus"></use></svg>
+          Nueva memoria
+        </button>
+        <button class="account-avatar" type="button" aria-label="Cuenta de Alejandro">AP</button>
+      </div>
+    </header>
+
+    <div class="page">
+      @switch (view()) {
+        @case ('home') {
+          <section class="hero">
+            <div class="hero-copy">
+              <span class="eyebrow">Tu archivo familiar</span>
+              <h1>Las vidas que amas merecen ser <em>recordadas.</em></h1>
+              <p>
+                Recoge voces, historias, fotografías y consejos. Conviértelos en un
+                legado vivo, íntimo y duradero para quienes vendrán.
+              </p>
+              <div class="hero-actions">
+                <button class="button button-light" type="button" (click)="navigate('interview')">
+                  <svg class="icon"><use href="#icon-mic"></use></svg>
+                  Comenzar una entrevista
+                </button>
+                <button class="text-button light" type="button" (click)="navigate('people')">
+                  Explorar mis memorias
+                  <svg class="icon"><use href="#icon-chevron"></use></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="hero-memory" aria-label="Consejo destacado de Carmen">
+              <div class="portrait portrait-carmen large" aria-hidden="true">
+                <span>CR</span>
+              </div>
+              <div class="sound-note">
+                <div class="waveform compact">
+                  @for (bar of [2, 5, 8, 4, 10, 7, 3, 8, 12, 5, 9, 4, 7, 3, 6, 9, 4, 2]; track $index) {
+                    <i [style.height.px]="bar * 2"></i>
+                  }
+                </div>
+                <span>00:42</span>
+              </div>
+              <blockquote>
+                “El tiempo no se encuentra:<br />
+                <strong>se aparta para quien quieres.”</strong>
+              </blockquote>
+              <div class="memory-author">
+                <span>Carmen, 86 años</span>
+                <small>Barcelona · Grabado en mayo de 2024</small>
+              </div>
+            </div>
+          </section>
+
+          <section class="stats-row" aria-label="Resumen del archivo">
+            <article>
+              <span class="stat-icon warm"><svg class="icon"><use href="#icon-people"></use></svg></span>
+              <div><strong>{{ vault.people().length }}</strong><small>personas recordadas</small></div>
+            </article>
+            <article>
+              <span class="stat-icon teal"><svg class="icon"><use href="#icon-book"></use></svg></span>
+              <div><strong>63</strong><small>historias conservadas</small></div>
+            </article>
+            <article>
+              <span class="stat-icon violet"><svg class="icon"><use href="#icon-image"></use></svg></span>
+              <div><strong>139</strong><small>fotografías y documentos</small></div>
+            </article>
+            <article>
+              <span class="stat-icon gold"><svg class="icon"><use href="#icon-clock"></use></svg></span>
+              <div><strong>7 h 29 m</strong><small>de voces preservadas</small></div>
+            </article>
+          </section>
+
+          <section class="section-block">
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">Continúa por donde lo dejaste</span>
+                <h2>Memorias en construcción</h2>
+              </div>
+              <button class="text-button" type="button" (click)="navigate('people')">
+                Ver todas <svg class="icon"><use href="#icon-chevron"></use></svg>
+              </button>
+            </div>
+
+            <div class="memory-grid compact-grid">
+              @for (person of vault.people().slice(0, 3); track person.id) {
+                <article class="memory-card" (click)="openPerson(person)" (keydown.enter)="openPerson(person)" tabindex="0">
+                  <div class="portrait" [class]="'portrait portrait-' + person.avatar" [style.--accent]="person.accent">
+                    <span>{{ person.initials }}</span>
+                    <small>{{ person.status }}</small>
+                  </div>
+                  <div class="memory-card-body">
+                    <div class="card-title">
+                      <div>
+                        <h3>{{ person.fullName }}</h3>
+                        <p>{{ person.relationship }} · {{ person.birthYear }}{{ person.deathYear ? '–' + person.deathYear : '' }}</p>
+                      </div>
+                      <span class="status-dot" [class.draft]="person.status === 'BORRADOR'"></span>
+                    </div>
+                    <p>{{ person.summary }}</p>
+                    <div class="progress-label">
+                      <span>Perfil biográfico</span><strong>{{ person.completeness }}%</strong>
+                    </div>
+                    <div class="progress-track"><i [style.width.%]="person.completeness"></i></div>
+                    <div class="card-metrics">
+                      <span>{{ person.stories }} historias</span>
+                      <span>{{ person.media }} medios</span>
+                      <span>{{ person.minutes }} min</span>
+                    </div>
+                  </div>
+                </article>
+              }
+            </div>
+          </section>
+
+          <section class="home-lower">
+            <article class="prompt-card">
+              <span class="eyebrow">Pregunta para hoy</span>
+              <h2>¿Qué canción te devuelve de golpe a tu juventud?</h2>
+              <p>
+                Las preguntas concretas abren recuerdos que una petición genérica suele dejar dormidos.
+              </p>
+              <button class="button button-outline" type="button" (click)="navigate('interview')">
+                Usar esta pregunta
+              </button>
+              <div class="prompt-decoration"><i></i><i></i><i></i></div>
+            </article>
+
+            <article class="activity-card">
+              <div class="section-heading small">
+                <div><span class="eyebrow">Actividad reciente</span><h2>El archivo sigue creciendo</h2></div>
+              </div>
+              <ul class="activity-list">
+                <li>
+                  <span class="mini-avatar carmen">CR</span>
+                  <div><strong>Añadiste “El taller de confección”</strong><small>En la cronología de Carmen · hace 2 días</small></div>
+                </li>
+                <li>
+                  <span class="mini-avatar antonio">AV</span>
+                  <div><strong>Transcripción revisada</strong><small>Entrevista con Antonio · hace 5 días</small></div>
+                </li>
+                <li>
+                  <span class="mini-avatar lucia">LF</span>
+                  <div><strong>12 fotografías organizadas</strong><small>Archivo de Lucía · hace una semana</small></div>
+                </li>
+              </ul>
+            </article>
+          </section>
+        }
+
+        @case ('people') {
+          <section class="page-heading">
+            <div>
+              <span class="eyebrow">Archivo biográfico</span>
+              <h1>Personas y memorias</h1>
+              <p>Cada perfil reúne una vida completa: su voz, sus vínculos, lugares, decisiones y legado.</p>
+            </div>
+            <button class="button button-primary" type="button" (click)="createDialogOpen.set(true)">
+              <svg class="icon"><use href="#icon-plus"></use></svg> Crear memoria
+            </button>
+          </section>
+
+          <div class="collection-toolbar">
+            <label class="page-search">
+              <svg class="icon"><use href="#icon-search"></use></svg>
+              <input
+                type="search"
+                placeholder="Buscar en el archivo"
+                [ngModel]="searchTerm()"
+                (ngModelChange)="searchTerm.set($event)"
+              />
+            </label>
+            <span>{{ filteredPeople().length }} memorias</span>
+            <button type="button">Más recientes</button>
+          </div>
+
+          <section class="memory-grid people-grid">
+            @for (person of filteredPeople(); track person.id) {
+              <article class="person-card" (click)="openPerson(person)" (keydown.enter)="openPerson(person)" tabindex="0">
+                <div class="person-cover" [style.--accent]="person.accent">
+                  <div class="portrait" [class]="'portrait portrait-' + person.avatar">
+                    <span>{{ person.initials }}</span>
+                  </div>
+                  <span class="privacy-pill">
+                    <svg class="icon"><use href="#icon-lock"></use></svg>
+                    {{ person.status === 'PUBLICADA' ? 'Pública' : person.status === 'FAMILIAR' ? 'Familia' : 'Borrador' }}
+                  </span>
+                </div>
+                <div class="person-card-body">
+                  <span class="relationship">{{ person.relationship }}</span>
+                  <h2>{{ person.fullName }}</h2>
+                  <p class="lifespan">{{ person.birthYear }}{{ person.deathYear ? ' — ' + person.deathYear : ' —' }} · {{ person.occupation }}</p>
+                  <p>{{ person.summary }}</p>
+                  <div class="tag-row">
+                    @for (tag of person.tags.slice(0, 3); track tag) { <span>{{ tag }}</span> }
+                  </div>
+                  <div class="person-card-footer">
+                    <div class="progress-ring" [style.--value]="person.completeness">
+                      <span>{{ person.completeness }}%</span>
+                    </div>
+                    <span>{{ person.stories }} historias · {{ person.minutes }} min de voz</span>
+                    <svg class="icon"><use href="#icon-chevron"></use></svg>
+                  </div>
+                </div>
+              </article>
+            } @empty {
+              <div class="empty-state">
+                <svg class="icon"><use href="#icon-search"></use></svg>
+                <h2>No hemos encontrado esa memoria</h2>
+                <p>Prueba con otro nombre, lugar, oficio o etiqueta.</p>
+              </div>
+            }
+          </section>
+        }
+
+        @case ('person') {
+          <section class="profile-hero" [style.--accent]="selectedPerson().accent">
+            <button class="back-button" type="button" (click)="navigate('people')">← Todas las memorias</button>
+            <div class="profile-main">
+              <div class="portrait profile-portrait" [class]="'portrait profile-portrait portrait-' + selectedPerson().avatar">
+                <span>{{ selectedPerson().initials }}</span>
+              </div>
+              <div class="profile-copy">
+                <span class="relationship">{{ selectedPerson().relationship }}</span>
+                <h1>{{ selectedPerson().fullName }}</h1>
+                <p class="profile-lifespan">
+                  {{ selectedPerson().birthYear }}{{ selectedPerson().deathYear ? ' — ' + selectedPerson().deathYear : ' — hoy' }}
+                  · {{ selectedPerson().occupation }}
+                </p>
+                <p>{{ selectedPerson().summary }}</p>
+                <div class="tag-row">
+                  @for (tag of selectedPerson().tags; track tag) { <span>{{ tag }}</span> }
+                </div>
+              </div>
+              <div class="profile-actions">
+                <button class="button button-light" type="button" (click)="navigate('interview')">
+                  <svg class="icon"><use href="#icon-mic"></use></svg> Entrevistar
+                </button>
+                <button class="button button-ghost-light" type="button">Editar perfil</button>
+              </div>
+            </div>
+            <div class="profile-facts">
+              <span><small>Nació en</small><strong>{{ selectedPerson().birthplace }}</strong></span>
+              <span><small>Vivió en</small><strong>{{ selectedPerson().residence }}</strong></span>
+              <span><small>Historias</small><strong>{{ selectedPerson().stories }}</strong></span>
+              <span><small>Archivo</small><strong>{{ selectedPerson().media }} elementos</strong></span>
+              <span><small>Voz conservada</small><strong>{{ selectedPerson().minutes }} minutos</strong></span>
+            </div>
+          </section>
+
+          <section class="profile-layout">
+            <div class="profile-column">
+              <div class="section-heading">
+                <div><span class="eyebrow">Una vida en el tiempo</span><h2>Cronología personal</h2></div>
+                <button class="text-button" type="button">Añadir acontecimiento <svg class="icon"><use href="#icon-plus"></use></svg></button>
+              </div>
+              <div class="personal-timeline">
+                @for (event of selectedPerson().events; track event.id) {
+                  <article>
+                    <div class="timeline-year">{{ event.year }}{{ event.endYear ? '–' + event.endYear : '' }}</div>
+                    <div class="timeline-node" [style.--accent]="selectedPerson().accent"></div>
+                    <div class="timeline-card">
+                      <span>{{ event.category }} · {{ event.place }}</span>
+                      <h3>{{ event.title }}</h3>
+                      <p>{{ event.description }}</p>
+                    </div>
+                  </article>
+                } @empty {
+                  <div class="empty-panel">
+                    <h3>La cronología está preparada</h3>
+                    <p>Añade el primer acontecimiento para empezar a recorrer esta vida.</p>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <aside class="profile-aside">
+              <article class="completeness-card">
+                <div class="progress-ring large-ring" [style.--value]="selectedPerson().completeness">
+                  <span>{{ selectedPerson().completeness }}%</span>
+                </div>
+                <div><span class="eyebrow">Profundidad del retrato</span><h3>Biografía {{ selectedPerson().completeness > 75 ? 'muy completa' : 'en crecimiento' }}</h3></div>
+                <p>La medida orienta; una vida nunca queda reducida a un porcentaje.</p>
+              </article>
+
+              <article class="wisdom-panel">
+                <span class="eyebrow">Palabras que quedan</span>
+                <h2>Consejos y legado</h2>
+                @for (wisdom of selectedPerson().wisdom; track wisdom.title) {
+                  <blockquote>“{{ wisdom.quote }}”</blockquote>
+                  <strong>{{ wisdom.title }}</strong>
+                  <small>{{ wisdom.audience }}</small>
+                } @empty {
+                  <p>Aún no se ha registrado ningún mensaje de legado.</p>
+                  <button class="button button-outline" type="button" (click)="navigate('interview')">Preguntar con cuidado</button>
+                }
+              </article>
+
+              <article class="consent-panel">
+                <svg class="icon"><use href="#icon-shield"></use></svg>
+                <div>
+                  <strong>Consentimiento documentado</strong>
+                  <p>La visibilidad, la voz y cualquier uso futuro de IA se autorizan por separado.</p>
+                </div>
+              </article>
+            </aside>
+          </section>
+        }
+
+        @case ('interview') {
+          <section class="interview-heading">
+            <div>
+              <span class="eyebrow">Estudio de entrevista</span>
+              <h1>Una buena historia empieza escuchando.</h1>
+              <p>Una guía amable y flexible para conversar sin convertir los recuerdos en un interrogatorio.</p>
+            </div>
+            <div class="interview-person">
+              <div class="mini-avatar carmen">{{ selectedPerson().initials }}</div>
+              <span><small>Entrevistando a</small><strong>{{ selectedPerson().fullName }}</strong></span>
+              <button type="button" (click)="navigate('people')">Cambiar</button>
+            </div>
+          </section>
+
+          <section class="interview-layout">
+            <div class="question-stage">
+              <div class="session-progress">
+                @for (question of vault.questions; track question.category; let index = $index) {
+                  <button
+                    type="button"
+                    [class.active]="index === activeQuestionIndex()"
+                    [class.done]="index < activeQuestionIndex()"
+                    (click)="activeQuestionIndex.set(index)"
+                  >
+                    <i>{{ index + 1 }}</i><span>{{ question.category }}</span>
+                  </button>
+                }
+              </div>
+
+              <article class="question-card" [class.sensitive]="activeQuestion().sensitivity === 'sensible'">
+                <span class="eyebrow">{{ activeQuestion().eyebrow }}</span>
+                <span class="question-category">{{ activeQuestion().category }}</span>
+                <h2>{{ activeQuestion().question }}</h2>
+                <div class="interview-hint">
+                  <span>i</span>
+                  <p>{{ activeQuestion().hint }}</p>
+                </div>
+
+                <div class="recorder" [class.is-recording]="recording()">
+                  <div class="waveform">
+                    @for (bar of [3, 6, 10, 4, 8, 13, 6, 3, 11, 15, 7, 4, 10, 6, 13, 9, 4, 7, 12, 5, 3, 8, 11, 6, 4, 10, 7, 3]; track $index) {
+                      <i [style.height.px]="bar * 2"></i>
+                    }
+                  </div>
+                  <strong>{{ recordingClock() }}</strong>
+                  <small>{{ recording() ? 'Grabando en este dispositivo' : 'Pulsa para iniciar un fragmento' }}</small>
+                  <button
+                    class="record-button"
+                    type="button"
+                    [attr.aria-label]="recording() ? 'Detener grabación' : 'Iniciar grabación'"
+                    (click)="toggleRecording()"
+                  >
+                    <span></span>
+                  </button>
+                </div>
+
+                <div class="question-actions">
+                  <button class="button button-outline" type="button" (click)="previousQuestion()">← Anterior</button>
+                  <button class="button button-primary" type="button" (click)="nextQuestion()">
+                    Siguiente pregunta <svg class="icon"><use href="#icon-chevron"></use></svg>
+                  </button>
+                </div>
+              </article>
+            </div>
+
+            <aside class="interview-notes">
+              <article>
+                <span class="eyebrow">Antes de grabar</span>
+                <h3>Permiso claro, siempre</h3>
+                <ul class="check-list">
+                  <li><i>✓</i> Explica para qué se usará la entrevista.</li>
+                  <li><i>✓</i> Permite pausar o retirar una respuesta.</li>
+                  <li><i>✓</i> Acordad quién podrá verla o escucharla.</li>
+                </ul>
+              </article>
+              <article>
+                <span class="eyebrow">Notas privadas</span>
+                <textarea rows="8" placeholder="Apunta nombres, lugares o preguntas para retomar después…"></textarea>
+                <small>Solo se guardan en el borrador de la sesión.</small>
+              </article>
+              <article class="quiet-card">
+                <strong>El silencio también es parte de la conversación.</strong>
+                <p>No hay prisa. Algunas historias necesitan unos segundos para encontrar sus palabras.</p>
+              </article>
+            </aside>
+          </section>
+        }
+
+        @case ('timeline') {
+          <section class="page-heading">
+            <div>
+              <span class="eyebrow">Cruzar generaciones</span>
+              <h1>Cronología compartida</h1>
+              <p>Observa cómo se entrelazan las vidas familiares con los cambios de su época.</p>
+            </div>
+          </section>
+
+          <div class="filter-chips" aria-label="Filtrar acontecimientos">
+            @for (filter of ['TODAS', 'INFANCIA', 'MIGRACIÓN', 'TRABAJO', 'EDUCACIÓN', 'FAMILIA']; track filter) {
+              <button type="button" [class.active]="timelineFilter() === filter" (click)="timelineFilter.set(filter)">{{ filter }}</button>
+            }
+          </div>
+
+          <section class="global-timeline">
+            <div class="era-band">
+              <span style="left: 7%; width: 23%">Posguerra y reconstrucción</span>
+              <span style="left: 30%; width: 28%">Transformación industrial</span>
+              <span style="left: 58%; width: 34%">Democracia y mundo conectado</span>
+            </div>
+            @for (event of visibleEvents(); track event.id; let index = $index) {
+              <article [class.right]="index % 2 !== 0">
+                <div class="global-year">{{ event.year }}</div>
+                <div class="global-dot" [style.background]="event.accent"></div>
+                <div class="global-event-card">
+                  <div class="mini-avatar" [class]="event.avatar">{{ event.personName.slice(0, 1) }}</div>
+                  <div>
+                    <span>{{ event.personName }} · {{ event.category }}</span>
+                    <h3>{{ event.title }}</h3>
+                    <p>{{ event.description }}</p>
+                    <small><svg class="icon"><use href="#icon-location"></use></svg>{{ event.place }}</small>
+                  </div>
+                </div>
+              </article>
+            }
+          </section>
+        }
+
+        @case ('family') {
+          <section class="page-heading">
+            <div>
+              <span class="eyebrow">Vínculos que explican una vida</span>
+              <h1>Árbol familiar</h1>
+              <p>Las relaciones pueden incluir familia biológica, elegida, amistades y personas decisivas.</p>
+            </div>
+            <button class="button button-primary" type="button"><svg class="icon"><use href="#icon-plus"></use></svg> Añadir vínculo</button>
+          </section>
+
+          <section class="family-canvas">
+            <div class="generation-label top">Generación 1</div>
+            <div class="family-generation first">
+              <article><span class="family-avatar warm">JR</span><strong>José Ruiz</strong><small>1910 — 1987</small></article>
+              <i class="partner-line"></i>
+              <article><span class="family-avatar rose">MN</span><strong>María Navarro</strong><small>1914 — 1993</small></article>
+            </div>
+            <div class="family-connector vertical"></div>
+            <div class="generation-label">Generación 2</div>
+            <div class="family-generation second">
+              <article class="featured" (click)="openPerson(vault.people()[0])">
+                <span class="family-avatar rose">CR</span><strong>Carmen Ruiz</strong><small>1938 — hoy</small><em>18 historias</em>
+              </article>
+              <i class="partner-line"></i>
+              <article><span class="family-avatar teal">LM</span><strong>Luis Martín</strong><small>1936 — 2011</small></article>
+            </div>
+            <div class="family-connector split"></div>
+            <div class="generation-label">Generación 3</div>
+            <div class="family-generation third">
+              <article><span class="family-avatar gold">AM</span><strong>Ana Martín</strong><small>Hija</small></article>
+              <article><span class="family-avatar teal">JM</span><strong>Javier Martín</strong><small>Hijo</small></article>
+              <article class="add-relative"><span>+</span><strong>Añadir persona</strong><small>Otro vínculo</small></article>
+            </div>
+            <div class="canvas-controls"><button type="button">−</button><span>100%</span><button type="button">+</button></div>
+          </section>
+
+          <article class="relationship-note">
+            <svg class="icon"><use href="#icon-family"></use></svg>
+            <div><strong>Un árbol sin casillas obligatorias</strong><p>MindSage admite familias diversas y distingue hechos confirmados, recuerdos y relaciones pendientes de verificar.</p></div>
+          </article>
+        }
+
+        @case ('atlas') {
+          <section class="page-heading">
+            <div>
+              <span class="eyebrow">La geografía de una familia</span>
+              <h1>Atlas de vidas</h1>
+              <p>Casas, viajes, migraciones y lugares que guardan una parte de la historia.</p>
+            </div>
+          </section>
+
+          <section class="atlas-layout">
+            <div class="map-card">
+              <div class="map-grid"></div>
+              <div class="land land-iberia"></div>
+              <div class="land land-france"></div>
+              <div class="land land-africa"></div>
+              <svg class="migration-routes" viewBox="0 0 800 520" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M410 370 C480 315, 505 245, 588 210" />
+                <path d="M320 195 C390 160, 500 155, 588 210" />
+                <path d="M455 270 C500 260, 548 225, 588 210" />
+              </svg>
+              <button class="map-pin pin-jaen active" type="button"><span>1938</span><i></i></button>
+              <button class="map-pin pin-coruna" type="button"><span>1942</span><i></i></button>
+              <button class="map-pin pin-morella" type="button"><span>1935</span><i></i></button>
+              <button class="map-pin pin-barcelona" type="button"><span>1958</span><i></i></button>
+              <div class="map-legend"><span><i class="birth"></i>Nacimiento</span><span><i class="move"></i>Migración</span><span><i class="memory"></i>Recuerdo</span></div>
+            </div>
+
+            <aside class="place-list">
+              <span class="eyebrow">Lugares documentados</span>
+              <h2>10 lugares, 4 vidas</h2>
+              <article class="active">
+                <span class="place-index">01</span>
+                <div><strong>Alcaudete, Jaén</strong><small>Infancia de Carmen · 1938–1958</small><p>La casa, los olivos y el camino a la escuela.</p></div>
+              </article>
+              <article>
+                <span class="place-index">02</span>
+                <div><strong>Barcelona</strong><small>Destino familiar · desde 1958</small><p>Trabajo, comunidad y una nueva generación.</p></div>
+              </article>
+              <article>
+                <span class="place-index">03</span>
+                <div><strong>A Coruña</strong><small>Infancia de Antonio · desde 1942</small><p>El puerto, el oficio y las primeras travesías.</p></div>
+              </article>
+              <article>
+                <span class="place-index">04</span>
+                <div><strong>Morella</strong><small>Infancia de Lucía · desde 1935</small><p>Inviernos, libros y escuela rural.</p></div>
+              </article>
+            </aside>
+          </section>
+        }
+
+        @case ('archive') {
+          <section class="page-heading">
+            <div>
+              <span class="eyebrow">Conservar también significa organizar</span>
+              <h1>Archivo multimedia</h1>
+              <p>Fotografías, audio, vídeo, cartas y documentos con contexto, fechas y procedencia.</p>
+            </div>
+            <button class="button button-primary" type="button"><svg class="icon"><use href="#icon-plus"></use></svg> Incorporar archivo</button>
+          </section>
+
+          <section class="archive-stats">
+            <article><strong>139</strong><span>elementos</span><small>42 fotografías · 19 audios · 7 vídeos · 71 documentos</small></article>
+            <article><strong>4,8 GB</strong><span>almacenamiento</span><small>Originales preservados y copias optimizadas</small></article>
+            <article><strong>93%</strong><span>con contexto</span><small>Fecha, lugar, personas y fuente documentados</small></article>
+          </section>
+
+          <section class="archive-grid">
+            <article class="archive-item photo sewing"><span>Fotografía · 1976</span><strong>El taller de confección</strong><small>Carmen y sus compañeras · Barcelona</small></article>
+            <article class="archive-item document"><span>Carta · 1969</span><strong>Desde el Atlántico</strong><small>Antonio escribe a su familia</small></article>
+            <article class="archive-item audio">
+              <span>Audio · 12:08</span><strong>La primera escuela</strong><small>Entrevista con Lucía</small>
+              <div class="waveform compact">@for (bar of [3, 7, 4, 10, 6, 3, 8, 5, 9, 4, 7, 3]; track $index) {<i [style.height.px]="bar * 2"></i>}</div>
+            </article>
+            <article class="archive-item photo school"><span>Fotografía · 1956</span><strong>La clase de invierno</strong><small>Escuela unitaria · Els Ports</small></article>
+            <article class="archive-item video"><span>Vídeo · 08:44</span><strong>Un oficio bien hecho</strong><small>Antonio explica el motor de un barco</small><button type="button"><svg class="icon"><use href="#icon-play"></use></svg></button></article>
+            <article class="archive-item document recipe"><span>Cuaderno · sin fecha</span><strong>Recetas de María</strong><small>12 recetas manuscritas</small></article>
+          </section>
+
+          <article class="export-banner">
+            <div class="export-icon"><svg class="icon"><use href="#icon-download"></use></svg></div>
+            <div><span class="eyebrow">Sin cadenas</span><h2>Llévate una copia completa</h2><p>Exporta el archivo en un formato legible y portable. Tus memorias no deben quedar cautivas de una plataforma.</p></div>
+            <button class="button button-light" type="button" (click)="exportArchive()">Exportar archivo JSON</button>
+          </article>
+        }
+
+        @case ('privacy') {
+          <section class="privacy-hero">
+            <svg class="icon"><use href="#icon-shield"></use></svg>
+            <span class="eyebrow">Privacidad por diseño</span>
+            <h1>Una vida no es un conjunto de datos cualquiera.</h1>
+            <p>MindSage separa claramente propiedad, acceso, publicación, investigación y cualquier posible uso de inteligencia artificial.</p>
+          </section>
+
+          <section class="principles-grid">
+            <article><span>01</span><h2>Consentimiento granular</h2><p>Publicar una historia no autoriza a clonar una voz. Cada finalidad se decide de forma independiente y revocable.</p></article>
+            <article><span>02</span><h2>Privado por defecto</h2><p>Una memoria nueva comienza cerrada. Su creador decide si será personal, familiar, comunitaria o pública.</p></article>
+            <article><span>03</span><h2>Derecho a corregir y borrar</h2><p>La persona retratada y quienes tengan legitimidad pueden pedir rectificaciones, exportación o eliminación.</p></article>
+            <article><span>04</span><h2>IA siempre declarada</h2><p>Cualquier voz, imagen o conversación sintética debe identificarse de forma visible y conservar trazabilidad.</p></article>
+            <article><span>05</span><h2>Datos portables</h2><p>El archivo se puede exportar con sus relaciones y metadatos para evitar la dependencia de un proveedor.</p></article>
+            <article><span>06</span><h2>Acceso mínimo</h2><p>Cada persona y proceso recibe únicamente los permisos indispensables, con registro de acciones sensibles.</p></article>
+          </section>
+
+          <section class="local-demo-note">
+            <div><strong>Esta demostración funciona localmente</strong><p>Los perfiles añadidos desde GitHub Pages se guardan solo en el almacenamiento de este navegador. Los datos ficticios incluidos no corresponden a personas reales.</p></div>
+            <button class="button button-outline" type="button" (click)="exportArchive()">Descargar mi copia</button>
+          </section>
+        }
+      }
+    </div>
+
+    <nav class="mobile-bottom-nav" aria-label="Navegación móvil">
+      @for (item of primaryNavigation.slice(0, 5); track item.id) {
+        <button type="button" [class.active]="view() === item.id" (click)="navigate(item.id)">
+          <svg class="icon"><use [attr.href]="'#icon-' + item.icon"></use></svg>
+          <span>{{ item.label }}</span>
+        </button>
+      }
+    </nav>
+  </main>
+</div>
+
+@if (createDialogOpen()) {
+  <div class="dialog-backdrop" role="presentation" (click)="createDialogOpen.set(false)">
+    <section class="create-dialog" role="dialog" aria-modal="true" aria-labelledby="create-title" (click)="$event.stopPropagation()">
+      <button class="dialog-close" type="button" aria-label="Cerrar" (click)="createDialogOpen.set(false)">×</button>
+      <span class="eyebrow">Un nuevo retrato biográfico</span>
+      <h2 id="create-title">¿A quién quieres recordar?</h2>
+      <p>Empieza con lo esencial. Después podrás construir su historia sin prisas.</p>
+
+      <label>
+        <span>Nombre completo *</span>
+        <input type="text" [(ngModel)]="newMemory.fullName" placeholder="Ej. Rosa Navarro López" autofocus />
+      </label>
+      <div class="dialog-row">
+        <label><span>Relación contigo</span><input type="text" [(ngModel)]="newMemory.relationship" placeholder="Ej. Abuela paterna" /></label>
+        <label><span>Año de nacimiento</span><input type="number" [(ngModel)]="newMemory.birthYear" placeholder="1936" min="1800" max="2100" /></label>
+      </div>
+      <label>
+        <span>Una primera presentación</span>
+        <textarea rows="4" [(ngModel)]="newMemory.summary" placeholder="¿Cómo presentarías a esta persona a alguien que no la conoció?"></textarea>
+      </label>
+      <div class="dialog-privacy">
+        <svg class="icon"><use href="#icon-lock"></use></svg>
+        <span><strong>Comenzará como borrador privado.</strong><small>Nada se publica automáticamente.</small></span>
+      </div>
+      <button class="button button-primary full-button" type="button" (click)="saveNewMemory()">Crear memoria</button>
+    </section>
+  </div>
+}
+
+@if (toast()) {
+  <div class="toast" role="status"><span>✓</span>{{ toast() }}</div>
+}

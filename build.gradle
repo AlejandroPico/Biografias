@@ -1,0 +1,12 @@
+plugins {
+    id 'base'
+}
+
+group = 'dev.mindsage'
+version = '0.1.0-SNAPSHOT'
+
+tasks.register('quality') {
+    group = 'verification'
+    description = 'Ejecuta las verificaciones del backend.'
+    dependsOn(':apps:api:check')
+}
