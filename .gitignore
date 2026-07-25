@@ -1,0 +1,36 @@
+# Operating systems and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.iml
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Java / Gradle
+.gradle/
+**/build/
+**/target/
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Node / Angular / Capacitor
+**/node_modules/
+**/dist/
+**/.angular/
+**/coverage/
+apps/web/android/
+apps/web/ios/
+
+# Logs and temporary files
+*.log
+*.tmp
+**/__pycache__/
+tmp/
