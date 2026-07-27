@@ -1,29 +1,50 @@
 # Arquitectura de MindSage
 
-## Decisión principal
+## Dos modos, una interfaz
 
-MindSage adopta un monolito modular para la primera etapa. Mantiene una sola API desplegable, pero
-separa el código por capacidades del dominio. Evita el coste operativo de microservicios prematuros
-y deja límites claros para extraer módulos cuando el volumen lo justifique.
+La PWA de Angular funciona hoy de forma local en GitHub Pages y está preparada para sustituir sus
+adaptadores locales por una API sin rehacer las pantallas.
+
+```mermaid
+flowchart LR
+    UI["Angular PWA / Capacitor"] --> VAULT["MemoryVaultService"]
+    VAULT --> META["localStorage\nmetadatos"]
+    UI --> MEDIA["LocalMediaStore"]
+    MEDIA --> IDB["IndexedDB\narchivos"]
+    UI --> MAP["Leaflet"]
+    MAP --> OSM["OpenStreetMap\nsolo teselas interactivas"]
+```
+
+En la demostración:
+
+- `MemoryVaultService` aplica las reglas de edición y serializa la bóveda local;
+- `LocalMediaStore` conserva blobs sin convertirlos a base64;
+- el navegador solicita consentimiento antes de grabar el micrófono;
+- el explorador invitado solo recibe vistas filtradas de contenido público;
+- registro, mensajes, reclamaciones y permisos simulan el flujo de producto, pero no una frontera de
+  seguridad.
+
+La arquitectura objetivo mantiene un monolito modular durante la primera etapa:
 
 ```mermaid
 flowchart TD
-    UI["Angular PWA"] --> API["API Spring Boot"]
-    MOBILE["Android / iOS<br/>Capacitor"] --> API
-    API --> DOMAIN["Módulos de dominio"]
-    DOMAIN --> DB["SQLite local<br/>PostgreSQL producción"]
-    DOMAIN --> MEDIA["Almacenamiento de medios<br/>(fase futura)"]
+    WEB["Angular PWA"] --> API["API Spring Boot /api/v1"]
+    MOBILE["Android e iOS\nCapacitor"] --> API
+    API --> DOMAIN["Identidad · Personas · Familia\nEntrevistas · Archivo · Mensajes"]
+    DOMAIN --> PG["PostgreSQL"]
+    DOMAIN --> OBJECTS["Almacenamiento de objetos\ncifrado + URLs firmadas"]
+    DOMAIN --> AUDIT["Auditoría y tareas"]
 ```
 
 ## Capas
 
 | Capa | Responsabilidad |
 |---|---|
-| `apps/web` | Experiencia web adaptable, PWA, estado local y envoltorio móvil |
-| `apps/api` | Reglas del dominio, autorización, contratos HTTP y persistencia |
-| Flyway | Evolución versionada y reproducible de la base de datos |
-| `tools` | Comprobaciones auxiliares independientes de la aplicación |
-| GitHub Actions | Pruebas, compilación y publicación de la demo |
+| `apps/web` | PWA adaptable, accesibilidad, estado local y envoltorio móvil |
+| `apps/api` | reglas del dominio, autorización por recurso, contratos HTTP y persistencia |
+| Flyway | evolución versionada del esquema |
+| `tools` | comprobaciones independientes de la aplicación |
+| GitHub Actions | pruebas, compilación y publicación de la demo |
 
 ## Módulos del backend
 
@@ -35,20 +56,22 @@ Los paquetes actuales son cortes verticales pequeños:
 - `shared`: persistencia y errores transversales;
 - `config`: límites HTTP, CORS y seguridad.
 
-Los siguientes cortes naturales serán `interviews`, `media`, `family`, `places`, `consent`,
-`provenance` y `identity`. Cada módulo deberá exponer casos de uso, no sus entidades JPA.
+Los siguientes cortes serán `identity`, `claims`, `family`, `places`, `interviews`, `media`,
+`messaging`, `consent` y `provenance`. Cada módulo expondrá casos de uso y DTO; las entidades de
+persistencia no se serializarán directamente.
 
 ## Persistencia
 
 SQLite es adecuado para desarrollo, demostraciones locales y uso individual sin servidor. No es una
-base de datos compartida por los navegadores ni puede recibir escrituras desde GitHub Pages.
-Producción usará PostgreSQL y almacenamiento de objetos para archivos grandes. Las dos bases
-comparten migraciones SQL compatibles siempre que sea posible; las diferencias específicas se
-introducirán en migraciones por plataforma cuando sean necesarias.
+base compartida por navegadores ni puede recibir escrituras desde GitHub Pages. La versión
+multiusuario usará PostgreSQL para metadatos y almacenamiento de objetos para archivos grandes.
 
-## Contratos y versiones
+Los binarios no se guardan en SQL. La base conserva propietario, permisos, hash de integridad,
+ubicación y metadatos. Las cargas se realizarán con URLs firmadas de corta duración y una fase de
+cuarentena y análisis.
 
-La API pública comienza en `/api/v1`. Las respuestas usan DTO inmutables; las entidades no se
-serializan directamente. Las operaciones de escritura permanecerán cerradas hasta disponer de
-autenticación, autorización por recurso, auditoría y controles de consentimiento.
+## Contratos y seguridad
 
+La API comienza en `/api/v1`. Cualquier escritura real exige autenticación, autorización sobre el
+recurso, validación de consentimiento y auditoría. El contrato previsto se detalla en
+[PRODUCTION_CONTRACT.md](PRODUCTION_CONTRACT.md).

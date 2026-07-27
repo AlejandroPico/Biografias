@@ -33,7 +33,7 @@ def main() -> None:
         events = database.execute("SELECT COUNT(*) FROM life_events").fetchone()[0]
         wisdom = database.execute("SELECT COUNT(*) FROM wisdom_entries").fetchone()[0]
 
-    expected = {"tables": 81, "people": 3, "events": 7, "wisdom": 4}
+    expected = {"tables": 92, "people": 3, "events": 7, "wisdom": 4}
     actual = {
         "tables": table_count,
         "people": people,
@@ -54,4 +54,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

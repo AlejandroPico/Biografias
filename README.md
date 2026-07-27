@@ -2,25 +2,36 @@
 
 > Un archivo vivo para conservar historias, voces, recuerdos y sabiduría entre generaciones.
 
-MindSage transforma entrevistas, fotografías, audios, vídeos y documentos familiares en biografías
-estructuradas que una familia puede preservar, explorar y compartir con consentimiento.
+MindSage transforma entrevistas, fotografías, audios, vídeos, documentos y relaciones familiares en
+biografías estructuradas. La aplicación está pensada para que cualquier persona pueda entrevistar a
+sus familiares, reconstruir su historia y conservarla con consentimiento.
 
-Esta primera fundación reemplaza el prototipo original por una arquitectura web, móvil y API preparada
-para crecer sin perder de vista lo esencial: las personas son dueñas de su historia.
+## Demostración funcional
 
-## Ya se puede probar
+[Abrir MindSage en GitHub Pages](https://alejandropico.github.io/Biografias/)
 
-La aplicación web incluye una demostración navegable con:
+Sin iniciar sesión se pueden explorar los perfiles y contenidos marcados como públicos. Al pulsar
+**Crear cuenta**, cualquier nombre, correo y contraseña válidos crean una identidad exclusivamente
+local para probar:
 
-- archivo de personas y perfiles biográficos;
-- cronología vital, sabiduría, árbol familiar y atlas de migraciones;
-- estudio de entrevista con preguntas guiadas y grabación simulada;
-- borradores privados guardados en el navegador y exportación JSON;
-- modo claro/oscuro, diseño adaptable y PWA instalable;
-- experiencia móvil preparada para empaquetarse con Capacitor.
+- ficha propia y fichas de familiares, vivan o no;
+- datos biográficos públicos y datos restringidos separados;
+- relaciones familiares y perfiles incompletos para personas mencionadas;
+- microeditor del árbol genealógico;
+- cronología, residencias, migraciones, sabiduría y recuerdos;
+- entrevistas guiadas con notas, transcripción y grabación real desde el micrófono;
+- biblioteca de imágenes, audio, vídeo y documentos;
+- mensajes locales vinculados a personas;
+- atlas interactivo con recorridos vitales;
+- exportación privada o pública e importación de copias JSON.
 
-Los datos de la demostración son ficticios. GitHub Pages publicará automáticamente la web al integrar
-los cambios en `main`.
+Los metadatos se guardan en `localStorage` y los archivos binarios en `IndexedDB`. Por eso sobreviven
+a una recarga en el mismo navegador, pero no se sincronizan entre dispositivos. Borrar los datos del
+sitio también borra este archivo local.
+
+> **No introduzcas DNI, número de la Seguridad Social, teléfono, grabaciones privadas ni otros datos
+> reales en la demo.** El registro, el inicio de sesión y la mensajería de GitHub Pages son una
+> simulación local; no constituyen autenticación ni cifrado de servidor.
 
 ## Arquitectura
 
@@ -29,12 +40,13 @@ apps/
 ├── api/   Spring Boot 4 · Java 25 LTS · SQLite/PostgreSQL · Flyway
 └── web/   Angular 22 · TypeScript 6 · PWA · Capacitor 8
 tools/     Verificación reproducible del esquema con Python
-docs/      Arquitectura, modelo de datos, privacidad y hoja de ruta
+docs/      Arquitectura, contrato de producción, privacidad y hoja de ruta
 ```
 
-La web de demostración funciona por sí sola en GitHub Pages. La API ofrece inicialmente consultas
-públicas de solo lectura y mantiene bloqueadas las operaciones no implementadas. SQLite permite
-desarrollo local sin infraestructura; PostgreSQL es el destino previsto para producción.
+La versión actual combina una aplicación local-first desplegable en GitHub Pages con una API pública
+de consulta. La futura versión multiusuario reutilizará la interfaz, pero trasladará identidad,
+permisos, mensajes y metadatos a PostgreSQL, y los medios a almacenamiento de objetos. SQLite queda
+reservado para desarrollo y usos locales de una sola instancia.
 
 ## Puesta en marcha
 
@@ -69,29 +81,35 @@ cd ../.. && ./gradlew :apps:api:test
 python tools/validate_schema.py
 ```
 
-## Principios del producto
+Cada actualización de `main` ejecuta las pruebas web, API y SQLite, y publica la PWA mediante GitHub
+Actions.
+
+## Principios
 
 - consentimiento explícito, granular, revocable y auditable;
 - privacidad por defecto y mínimos privilegios;
-- procedencia y citas para distinguir memoria, interpretación y hechos contrastados;
-- exportación y portabilidad para evitar que una vida quede atrapada en una plataforma;
+- procedencia para distinguir memoria, interpretación y hechos contrastados;
+- exportación y portabilidad;
+- perfiles mencionados no equivalen a identidades verificadas;
 - cualquier recreación futura de voz, imagen o personalidad permanece desactivada sin autorización
-  específica y debe identificarse siempre como simulación;
-- diseño accesible para personas mayores, familias y entrevistadores.
+  específica y siempre debe identificarse como simulación.
 
 ## Documentación
 
 - [Arquitectura](docs/ARCHITECTURE.md)
+- [Contrato de la versión multiusuario](docs/PRODUCTION_CONTRACT.md)
 - [Modelo de datos](docs/DATA_MODEL.md)
 - [Privacidad e IA](docs/PRIVACY_AND_AI.md)
 - [Hoja de ruta](docs/ROADMAP.md)
 - [Política de seguridad](SECURITY.md)
 - [Cómo contribuir](CONTRIBUTING.md)
 
-## Estado
+## Autor y recursos de terceros
 
-MindSage está en fase fundacional. La interfaz pública es una demo funcional; autenticación,
-subida real de medios, sincronización y publicación editorial forman parte de las siguientes etapas.
-No se deben introducir datos personales reales hasta completar esas garantías.
+Proyecto de [Alejandro Pico Pérez](https://alejandropico.github.io/Portfolio/).
 
-Licencia: [MIT](LICENSE).
+El logotipo adapta el icono `tree-fill` de [Bootstrap Icons](https://github.com/twbs/icons), publicado
+bajo licencia MIT. El atlas usa [Leaflet](https://leafletjs.com/) y teselas de
+[OpenStreetMap](https://www.openstreetmap.org/copyright), con atribución visible en el mapa.
+
+Licencia del proyecto: [MIT](LICENSE).

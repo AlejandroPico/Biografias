@@ -8,5 +8,13 @@
   "scope": "./",
   "start_url": "./",
   "lang": "es-ES",
-  "categories": ["lifestyle", "education", "family"]
+  "categories": ["lifestyle", "education", "family"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }

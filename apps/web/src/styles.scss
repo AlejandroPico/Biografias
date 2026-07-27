@@ -1,3 +1,5 @@
+@import 'leaflet/dist/leaflet.css';
+
 :root {
   color-scheme: light;
   --ink: #1f2a26;
@@ -21,11 +23,15 @@
   --radius-sm: 13px;
   --sidebar-width: 244px;
   font-family:
-    Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Inter,
+    ui-sans-serif,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
     sans-serif;
 }
 
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   color-scheme: dark;
   --ink: #edf2ee;
   --ink-soft: #aab8b1;
@@ -58,8 +64,7 @@ body {
   margin: 0;
   color: var(--ink);
   background:
-    radial-gradient(circle at 80% 0%, rgb(205 190 156 / 10%), transparent 26rem),
-    var(--paper);
+    radial-gradient(circle at 80% 0%, rgb(205 190 156 / 10%), transparent 26rem), var(--paper);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
 }
@@ -76,14 +81,14 @@ button {
 }
 
 button,
-[tabindex="0"] {
+[tabindex='0'] {
   -webkit-tap-highlight-color: transparent;
 }
 
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
-[tabindex="0"]:focus-visible {
+[tabindex='0']:focus-visible {
   outline: 3px solid rgb(52 126 131 / 38%);
   outline-offset: 3px;
 }
