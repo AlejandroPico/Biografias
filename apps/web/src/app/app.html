@@ -108,13 +108,7 @@
   <aside class="sidebar" [class.open]="mobileMenuOpen()">
     <button class="brand" type="button" (click)="navigate('home')" aria-label="Ir al inicio">
       <span class="brand-mark brand-tree" aria-hidden="true">
-        <svg viewBox="0 0 16 16">
-          <path
-            class="tree-crown"
-            d="M8.416.223a.5.5 0 0 0-.832 0l-3 4.5A.5.5 0 0 0 5 5.5h.098L3.076 8.735A.5.5 0 0 0 3.5 9.5h.191l-1.638 3.276a.5.5 0 0 0 .447.724H7V16h2v-2.5h4.5a.5.5 0 0 0 .447-.724L12.31 9.5h.191a.5.5 0 0 0 .424-.765L10.902 5.5H11a.5.5 0 0 0 .416-.777z"
-          ></path>
-          <path class="tree-trunk" d="M7 13.25h2V16H7z"></path>
-        </svg>
+        <img src="mindsage-tree.png" alt="" />
       </span>
       <span>
         <strong>MindSage</strong>
@@ -218,7 +212,9 @@
             (click)="openSelfProfile()"
             [attr.aria-label]="'Abrir la cuenta de ' + user.fullName"
           >
-            <span>{{ user.fullName.slice(0, 1).toUpperCase() }}</span>
+            <span
+              ><svg class="avatar-silhouette"><use href="#icon-user"></use></svg
+            ></span>
             <small>{{ user.fullName }}</small>
           </button>
           <button
@@ -252,6 +248,7 @@
       @switch (view()) {
         @case ('home') {
           <section class="hero">
+            <img class="hero-tree-watermark" src="mindsage-tree.png" alt="" aria-hidden="true" />
             <div class="hero-copy">
               <span class="eyebrow">Tu archivo familiar</span>
               <h1>Las vidas que amas merecen ser <em>recordadas.</em></h1>
@@ -280,7 +277,7 @@
 
             <div class="hero-memory" aria-label="Consejo destacado de Carmen">
               <div class="portrait portrait-carmen large" aria-hidden="true">
-                <span>CR</span>
+                <svg class="avatar-silhouette"><use href="#icon-user"></use></svg>
               </div>
               <span class="quote-format">Consejo documentado · texto</span>
               <blockquote>
@@ -357,7 +354,7 @@
                     [class]="'portrait portrait-' + person.avatar"
                     [style.--accent]="person.accent"
                   >
-                    <span>{{ person.initials }}</span>
+                    <svg class="avatar-silhouette"><use href="#icon-user"></use></svg>
                     <small>{{ person.status }}</small>
                   </div>
                   <div class="memory-card-body">
@@ -480,7 +477,7 @@
               >
                 <div class="person-cover" [style.--accent]="person.accent">
                   <div class="portrait" [class]="'portrait portrait-' + person.avatar">
-                    <span>{{ person.initials }}</span>
+                    <svg class="avatar-silhouette"><use href="#icon-user"></use></svg>
                   </div>
                   <span class="privacy-pill">
                     <svg class="icon"><use href="#icon-lock"></use></svg>
@@ -532,7 +529,7 @@
                 class="portrait profile-portrait"
                 [class]="'portrait profile-portrait portrait-' + selectedPerson().avatar"
               >
-                <span>{{ selectedPerson().initials }}</span>
+                <svg class="avatar-silhouette"><use href="#icon-user"></use></svg>
               </div>
               <div class="profile-copy">
                 <span class="relationship">{{ selectedPerson().relationship }}</span>
@@ -765,9 +762,9 @@
               <div class="linked-people">
                 @for (item of selectedRelations(); track item.relation.id) {
                   <button type="button" (click)="openPerson(item.person)">
-                    <span class="mini-avatar" [style.background]="item.person.accent">{{
-                      item.person.initials
-                    }}</span>
+                    <span class="mini-avatar" [style.background]="item.person.accent"
+                      ><svg class="avatar-silhouette"><use href="#icon-user"></use></svg
+                    ></span>
                     <span
                       ><small>{{ item.label.replace('_', ' ') }} · {{ item.relation.status }}</small
                       ><strong>{{ item.person.fullName }}</strong></span
@@ -1239,7 +1236,9 @@
               </p>
             </div>
             <div class="interview-person">
-              <div class="mini-avatar carmen">{{ selectedPerson().initials }}</div>
+              <div class="mini-avatar carmen">
+                <svg class="avatar-silhouette"><use href="#icon-user"></use></svg>
+              </div>
               <span
                 ><small>Entrevistando a</small
                 ><strong>{{ selectedPerson().fullName }}</strong></span
@@ -1454,7 +1453,7 @@
                 <div class="global-dot" [style.background]="event.accent"></div>
                 <div class="global-event-card">
                   <div class="mini-avatar" [class]="event.avatar">
-                    {{ event.personName.slice(0, 1) }}
+                    <svg class="avatar-silhouette"><use href="#icon-user"></use></svg>
                   </div>
                   <div>
                     <span>{{ event.personName }} · {{ event.category }}</span>
@@ -1501,9 +1500,9 @@
                 </select>
               </label>
               <div class="family-summary">
-                <span class="family-avatar" [style.background]="familyFocus().accent">{{
-                  familyFocus().initials
-                }}</span>
+                <span class="family-avatar" [style.background]="familyFocus().accent"
+                  ><svg class="avatar-silhouette"><use href="#icon-user"></use></svg
+                ></span>
                 <strong>{{ familyFocus().fullName }}</strong>
                 <small>{{ lifespan(familyFocus()) }}</small>
                 <p>{{ familyRelations().length }} vínculo(s) documentado(s)</p>
@@ -1545,9 +1544,9 @@
                 }
               </svg>
               <article class="family-focus-card">
-                <span class="family-avatar" [style.background]="familyFocus().accent">{{
-                  familyFocus().initials
-                }}</span>
+                <span class="family-avatar" [style.background]="familyFocus().accent"
+                  ><svg class="avatar-silhouette"><use href="#icon-user"></use></svg
+                ></span>
                 <strong>{{ familyFocus().fullName }}</strong>
                 <small>Persona central</small>
                 <button type="button" (click)="openPerson(familyFocus())">Abrir ficha</button>
@@ -1561,9 +1560,9 @@
                     tabindex="0"
                   >
                     <span class="relation-badge">{{ item.label.replace('_', ' ') }}</span>
-                    <span class="family-avatar" [style.background]="item.person.accent">{{
-                      item.person.initials
-                    }}</span>
+                    <span class="family-avatar" [style.background]="item.person.accent"
+                      ><svg class="avatar-silhouette"><use href="#icon-user"></use></svg
+                    ></span>
                     <strong>{{ item.person.fullName }}</strong>
                     <small>{{ lifespan(item.person) }}</small>
                     <em>{{ item.relation.status }}</em>
@@ -1878,7 +1877,9 @@
             <div class="message-list">
               @for (message of userMessages(); track message.id) {
                 <article [class.unread]="!message.read" (click)="vault.markMessageRead(message.id)">
-                  <span class="message-avatar">{{ message.senderName.slice(0, 1) }}</span>
+                  <span class="message-avatar"
+                    ><svg class="avatar-silhouette"><use href="#icon-user"></use></svg
+                  ></span>
                   <div class="message-copy">
                     <span
                       ><strong>{{ message.senderName }}</strong
@@ -1907,13 +1908,7 @@
         @case ('about') {
           <section class="about-hero">
             <div class="about-tree" aria-hidden="true">
-              <svg viewBox="0 0 16 16">
-                <path
-                  class="tree-crown"
-                  d="M8.416.223a.5.5 0 0 0-.832 0l-3 4.5A.5.5 0 0 0 5 5.5h.098L3.076 8.735A.5.5 0 0 0 3.5 9.5h.191l-1.638 3.276a.5.5 0 0 0 .447.724H7V16h2v-2.5h4.5a.5.5 0 0 0 .447-.724L12.31 9.5h.191a.5.5 0 0 0 .424-.765L10.902 5.5H11a.5.5 0 0 0 .416-.777z"
-                ></path>
-                <path class="tree-trunk" d="M7 13.25h2V16H7z"></path>
-              </svg>
+              <img src="mindsage-tree.png" alt="" />
             </div>
             <span class="eyebrow">Acerca de MindSage</span>
             <h1>Conservar una vida es conservar una parte del mundo.</h1>
@@ -2099,14 +2094,7 @@
         ×
       </button>
       <div class="auth-brand">
-        <span class="brand-mark brand-tree"
-          ><svg viewBox="0 0 16 16">
-            <path
-              class="tree-crown"
-              d="M8.416.223a.5.5 0 0 0-.832 0l-3 4.5A.5.5 0 0 0 5 5.5h.098L3.076 8.735A.5.5 0 0 0 3.5 9.5h.191l-1.638 3.276a.5.5 0 0 0 .447.724H7V16h2v-2.5h4.5a.5.5 0 0 0 .447-.724L12.31 9.5h.191a.5.5 0 0 0 .424-.765L10.902 5.5H11a.5.5 0 0 0 .416-.777z"
-            ></path>
-            <path class="tree-trunk" d="M7 13.25h2V16H7z"></path></svg
-        ></span>
+        <span class="brand-mark brand-tree"><img src="mindsage-tree.png" alt="" /></span>
         <span><strong>MindSage</strong><small>Cuenta local de demostración</small></span>
       </div>
       <div class="auth-tabs">
@@ -2127,86 +2115,37 @@
       </div>
 
       @if (authMode() === 'register') {
-        <span class="eyebrow">Tu archivo privado</span>
-        <h2 id="auth-title">Crea un usuario local</h2>
-        <p>Cualquier nombre y correo de prueba sirven. La cuenta solo existe en este navegador.</p>
-        <div class="demo-warning">
-          <svg class="icon"><use href="#icon-info"></use></svg>
-          <p>
-            No introduzcas datos personales reales: GitHub Pages no ofrece autenticación ni cifrado
-            de servidor.
-          </p>
-        </div>
+        <h2 id="auth-title">Crea tu archivo</h2>
+        <p class="auth-intro">Usa datos ficticios: esta cuenta solo existe en tu navegador.</p>
         <label
           ><span>Nombre completo *</span
           ><input type="text" [(ngModel)]="registerForm.fullName" autocomplete="name"
         /></label>
-        <div class="dialog-row">
-          <label
-            ><span>Correo *</span
-            ><input
-              type="email"
-              [(ngModel)]="registerForm.email"
-              placeholder="prueba@ejemplo.local"
-              autocomplete="email"
-          /></label>
-          <label
-            ><span>Contraseña de prueba</span
-            ><input type="password" [(ngModel)]="registerForm.password" autocomplete="new-password"
-          /></label>
-        </div>
-        <div class="dialog-row">
-          <label
-            ><span>Fecha de nacimiento</span
-            ><input type="date" [(ngModel)]="registerForm.birthDate"
-          /></label>
-          <label
-            ><span>Teléfono privado</span
-            ><input
-              type="tel"
-              [(ngModel)]="registerForm.phone"
-              placeholder="Ficticio en la demo"
-              autocomplete="off"
-          /></label>
-        </div>
-        <div class="dialog-row">
-          <label
-            ><span>DNI/NIE privado</span
-            ><input
-              type="text"
-              [(ngModel)]="registerForm.dni"
-              placeholder="Ficticio en la demo"
-              autocomplete="off"
-          /></label>
-          <label
-            ><span>N.º Seguridad Social</span
-            ><input
-              type="text"
-              [(ngModel)]="registerForm.socialSecurityNumber"
-              placeholder="Ficticio en la demo"
-              autocomplete="off"
-          /></label>
-        </div>
+        <label
+          ><span>Correo *</span
+          ><input
+            type="email"
+            [(ngModel)]="registerForm.email"
+            placeholder="prueba@ejemplo.local"
+            autocomplete="email"
+        /></label>
+        <label
+          ><span>Contraseña de prueba</span
+          ><input type="password" [(ngModel)]="registerForm.password" autocomplete="new-password"
+        /></label>
         <label class="consent-confirmation auth-consent">
           <input type="checkbox" [(ngModel)]="registerForm.acceptTerms" />
           <span
             ><strong>Entiendo que es una demostración local</strong
-            ><small
-              >Los datos permanecen en este dispositivo y pueden borrarse al limpiar el
-              navegador.</small
-            ></span
+            ><small>Los datos permanecen en este dispositivo.</small></span
           >
         </label>
         <button class="button button-primary full-button" type="button" (click)="register()">
           Crear usuario y mi ficha
         </button>
       } @else {
-        <span class="eyebrow">Bienvenido de nuevo</span>
-        <h2 id="auth-title">Entrar en la demostración</h2>
-        <p>
-          Si el usuario no existe, MindSage creará uno automáticamente con el nombre o correo
-          indicado.
-        </p>
+        <h2 id="auth-title">Entra en tu archivo</h2>
+        <p class="auth-intro">En esta demo puedes usar cualquier nombre o correo.</p>
         <label
           ><span>Nombre o correo</span
           ><input type="text" [(ngModel)]="loginForm.identifier" autocomplete="username"
@@ -2216,12 +2155,28 @@
           ><input type="password" [(ngModel)]="loginForm.password" autocomplete="current-password"
         /></label>
         <button class="button button-primary full-button" type="button" (click)="login()">
-          Entrar en mi archivo local
-        </button>
-        <button class="text-button auth-switch" type="button" (click)="authMode.set('register')">
-          Prefiero completar el registro detallado
+          Entrar
         </button>
       }
+      <div class="auth-separator"><span>o continúa con</span></div>
+      <div class="social-auth-grid" aria-label="Accesos sociales de demostración">
+        <button type="button" (click)="socialLogin('Google')">
+          <span class="social-logo google">G</span><span>Google</span>
+        </button>
+        <button type="button" (click)="socialLogin('Microsoft')">
+          <span class="social-logo microsoft" aria-hidden="true"><i></i><i></i><i></i><i></i></span
+          ><span>Microsoft</span>
+        </button>
+        <button type="button" (click)="socialLogin('Apple')">
+          <span class="social-logo apple" aria-hidden="true">●</span><span>Apple</span>
+        </button>
+        <button type="button" (click)="socialLogin('Facebook')">
+          <span class="social-logo facebook">f</span><span>Facebook</span>
+        </button>
+      </div>
+      <p class="social-auth-note">
+        Disponibles cuando MindSage incorpore autenticación de servidor.
+      </p>
     </section>
   </div>
 }

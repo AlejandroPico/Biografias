@@ -37,6 +37,19 @@ describe('App', () => {
     expect(app.authMode()).toBe('register');
   });
 
+  it('unmounts Atlas before opening the registration flow', () => {
+    const fixture = TestBed.createComponent(App);
+    const app = fixture.componentInstance;
+
+    app.navigate('atlas');
+    expect(app.view()).toBe('atlas');
+
+    app.navigate('archive');
+
+    expect(app.view()).toBe('home');
+    expect(app.authDialogOpen()).toBe(true);
+  });
+
   it('registers a local user and saves a complete private profile', () => {
     const fixture = TestBed.createComponent(App);
     const app = fixture.componentInstance;

@@ -472,6 +472,8 @@ export class App implements OnDestroy {
   navigate(view: View): void {
     const item = this.primaryNavigation.find((candidate) => candidate.id === view);
     if (item?.protected && !this.vault.currentUser()) {
+      this.view.set('home');
+      this.mobileMenuOpen.set(false);
       this.openAuth('register');
       this.showToast('Crea un usuario local para acceder a esta función');
       return;
@@ -526,6 +528,12 @@ export class App implements OnDestroy {
   openAuth(mode: 'login' | 'register'): void {
     this.authMode.set(mode);
     this.authDialogOpen.set(true);
+  }
+
+  socialLogin(provider: 'Google' | 'Microsoft' | 'Apple' | 'Facebook'): void {
+    this.showToast(
+      `El acceso con ${provider} se activará al conectar la autenticación de servidor.`,
+    );
   }
 
   register(): void {

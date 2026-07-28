@@ -108,8 +108,9 @@ Actions.
 
 Proyecto de [Alejandro Pico Pérez](https://alejandropico.github.io/Portfolio/).
 
-El logotipo adapta el icono `tree-fill` de [Bootstrap Icons](https://github.com/twbs/icons), publicado
-bajo licencia MIT. El atlas usa [Leaflet](https://leafletjs.com/) y teselas de
+El árbol multicolor con raíces es un diseño original creado para MindSage. Su
+[favicon SVG reutilizable](favicon.svg) está disponible en la raíz para enlazarlo desde el portfolio
+u otros proyectos. El atlas usa [Leaflet](https://leafletjs.com/) y teselas de
 [OpenStreetMap](https://www.openstreetmap.org/copyright), con atribución visible en el mapa.
 
 Licencia del proyecto: [MIT](LICENSE).
